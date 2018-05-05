@@ -1,5 +1,5 @@
 - hosts: ocp
-  sudo: True
+  become: True
 
   tasks:
 
@@ -20,7 +20,7 @@
     - name: register node with subscription-manager
       redhat_subscription: state=present username="{{ vault_rhn_username }}" password="{{ vault_rhn_password }}" autosubscribe=false
       register: task_result
-      until: task_result | succeeded
+      until: task_result is succeeded
       retries: 10
       delay: 5
 
@@ -44,28 +44,28 @@
     - name: "Install required packages"
       yum: name={{ item }} state=present
       with_items:
-       - vim 
-       - telnet 
-       - wget 
-       - git 
-       - net-tools 
-       - bind-utils 
-       - iptables-services 
-       - bridge-utils 
-       - bash-completion 
+       - vim
+       - telnet
+       - wget
+       - git
+       - net-tools
+       - bind-utils
+       - iptables-services
+       - bridge-utils
+       - bash-completion
        - nfs-utils
 
     - name: "Nice to have extra packages"
       yum: name={{ item }} state=present
       with_items:
-       - emacs-nox 
+       - emacs-nox
 
     - name: "More packages for OpenShift"
       yum: name={{ item }} state=present
       with_items:
          - ansible
-         - atomic-openshift-utils 
-         - atomic-openshift-excluder 
+         - atomic-openshift-utils
+         - atomic-openshift-excluder
          - atomic-openshift-docker-excluder
 
     - name: "Install Docker"
@@ -79,16 +79,16 @@
                    VG=docker-vg"
 
     - name: "Execute Docker Storage Setup"
-      shell:  docker-storage-setup;   
+      shell:  docker-storage-setup;
 
     - name: "Enable Docker Service"
-      shell:  systemctl enable docker;   
+      shell:  systemctl enable docker;
 
     - name: "Start Docker Service"
       shell:  systemctl start docker;
 
     - name: "Unexclude openshift packages"
-      shell:   atomic-openshift-excluder unexclude;      
+      shell:   atomic-openshift-excluder unexclude;
 
     - name: "Unexclude openshift docker packages"
-      shell:   atomic-openshift-docker-excluder unexclude;         
+      shell:   atomic-openshift-docker-excluder unexclude;

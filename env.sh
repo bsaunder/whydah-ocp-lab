@@ -1,5 +1,6 @@
 # See README.md
-export VM_LIST="jump master0 master1 master2 lb node1 node2 node3"
+export OCP_LIST="lb master0 master1 master2 node0 node1 node2"
+export JUMP_LIST="jump"
 export DOMAIN="nip.io"
 declare -A IPADDRESS=( \
     ["jump"]="192.168.1.59" \
@@ -7,9 +8,9 @@ declare -A IPADDRESS=( \
     ["master1"]="192.168.1.145" \
     ["master2"]="192.168.1.16" \
     ["lb"]="192.168.1.175" \
-    ["node1"]="192.168.1.245" \
-    ["node2"]="192.168.1.246" \
-    ["node3"]="192.168.1.248" \
+    ["node0"]="192.168.1.245" \
+    ["node1"]="192.168.1.246" \
+    ["node2"]="192.168.1.248" \
 )
 declare -A MACADDRESS=( \
     ["jump"]="52:54:00:42:B4:AD" \
@@ -17,9 +18,9 @@ declare -A MACADDRESS=( \
     ["master1"]="52:54:00:AC:C6:E1" \
     ["master2"]="52:54:00:DE:6B:C4" \
     ["lb"]="52:54:00:96:FF:84"   \
-    ["node1"]="52:54:00:4A:22:9B"   \
-    ["node2"]="52:54:00:4A:22:9C"   \
-    ["node3"]="52:54:00:4A:22:9D"   \
+    ["node0"]="52:54:00:4A:22:9B"   \
+    ["node1"]="52:54:00:4A:22:9C"   \
+    ["node2"]="52:54:00:4A:22:9D"   \
 )
 export OCPDOMAIN="btsaunde.com"
 export WORKSPACE="$HOME/ocp"

@@ -1,5 +1,5 @@
 - hosts: jump
-  sudo: True
+  become: True
 
   tasks:
 
@@ -20,7 +20,7 @@
     - name: register node with subscription-manager
       redhat_subscription: state=present username="{{ vault_rhn_username }}" password="{{ vault_rhn_password }}" autosubscribe=false
       register: task_result
-      until: task_result | succeeded
+      until: task_result is succeeded
       retries: 10
       delay: 5
 
@@ -34,10 +34,10 @@
       with_items: '{{openshift_subscription_pool}}'
 
     - name: Enable only required repositories with Subscription Manager
-      command: subscription-manager repos --disable="*" --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-fast-datapath-rpms" 
+      command: subscription-manager repos --disable="*" --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-fast-datapath-rpms"
 
     - name: "Add repositories for OpenShift 3.7"
-      shell: subscription-manager repos --enable="rhel-7-server-ose-3.7-rpms" 
+      shell: subscription-manager repos --enable="rhel-7-server-ose-3.7-rpms"
 
     - name: "Update the system"
       yum:
@@ -47,10 +47,10 @@
     - name: "Ansible and scripts to drive the openshift installation"
       yum: name={{ item }} state=present
       with_items:
-       - atomic-openshift-utils 
+       - atomic-openshift-utils
        - ansible
 
     - name: "Nice to have extra packages"
       yum: name={{ item }} state=present
       with_items:
-       - emacs-nox 
+       - emacs-nox
