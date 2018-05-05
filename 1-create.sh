@@ -13,7 +13,7 @@ fi
 for i in `cat hosts|grep -v \\\\[`;
 do
 
-    echo "--> Starting VM $i"
+    echo "--> Creating VM $i"
 
     baseimage="$VMS/$i-base.qcow2"
     image="$VMS/$i.qcow2"

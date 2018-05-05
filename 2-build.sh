@@ -31,7 +31,7 @@ do
     echo "----> Attaching Disk to $i, Using $dockerdisk..."
     virsh attach-disk $i --source $dockerdisk --target vdb --persistent
 
-    echo "----> VM $i Built]"
+    echo "----> VM $i Built"
 done
 
 echo "--> Listing VMs..."

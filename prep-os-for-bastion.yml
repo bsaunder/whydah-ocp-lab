@@ -39,11 +39,6 @@
     - name: "Add repositories for OpenShift 3.7"
       shell: subscription-manager repos --enable="rhel-7-server-ose-3.7-rpms"
 
-    - name: "Update the system"
-      yum:
-        name: '*'
-        state: latest
-
     - name: "Ansible and scripts to drive the openshift installation"
       yum: name={{ item }} state=present
       with_items:
