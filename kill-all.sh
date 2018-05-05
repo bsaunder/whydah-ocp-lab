@@ -18,6 +18,8 @@ do
 
 done
 
+rm -rf $WORKSPACE
+
 virsh list --all
 
 exit

@@ -2,16 +2,20 @@
 
 source ./env.sh
 
-echo "copied sample configuration hosts.ocp, hosts and 3-keys.sh to the jumpstation"
-scp hosts.ocp root@jump.$DOMAIN:~/
-scp hosts root@jump.$DOMAIN:~/
-scp 3-keys.sh root@jump.$DOMAIN:~/
-echo "Do this:"
-echo "            $ ssh root@jump.$DOMAIN"
+echo "--> Copying hosts.ocp, hosts and 3-keys.sh to Jump Box..."
+scp hosts.ocp root@jump.${IPADDRESS[jump]}.$DOMAIN:~/
+scp hosts root@jump.${IPADDRESS[jump]}.$DOMAIN:~/
+scp 3-keys.sh root@jump.${IPADDRESS[jump]}.$DOMAIN:~/
+echo "--> Copy Complete"
+
+echo "To Install OCP, Run:"
+echo "            $ ssh root@jump.${IPADDRESS[jump]}.$DOMAIN"
 echo "            jump# ssh-keygen"
 echo "            jump# bash ./3-keys.sh"
 echo "            jump# ansible-playbook -i hosts.ocp /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml"
 exit
+
+
 ####
 # Below are random notes
 ####
