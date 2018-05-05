@@ -8,7 +8,7 @@ rm -v hosts
 
 for i in $VM_LIST
 do
-    echo "$i.$DOMAIN" >> hosts
+    echo $i.${IPADDRESS[$i]}.$DOMAIN >> hosts
 done
 
 replace_tokens() {
@@ -16,4 +16,3 @@ replace_tokens() {
 }
 
 replace_tokens ./hosts.ocp.template > ./hosts.ocp.template
-

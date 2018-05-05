@@ -1,6 +1,8 @@
-[jump]
-jump.gwiki.org
-[ocp]
-master0.gwiki.org
-node0.gwiki.org
-node1.gwiki.org
+jump.192.168.1.59.nip.io
+master0.192.168.1.107.nip.io
+master1.192.168.1.145.nip.io
+master2.192.168.1.16.nip.io
+lb.192.168.1.175.nip.io
+node1.192.168.1.245.nip.io
+node2.192.168.1.246.nip.io
+node3.192.168.1.248.nip.io

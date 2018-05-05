@@ -1,17 +1,27 @@
 # See README.md
-export VM_LIST="jump master0 node0"
-export DOMAIN="gwiki.org"
-declare -A MACADDRESS=( \
-    ["jump."$DOMAIN]="52:54:00:42:B4:AD" \
-    ["master0."$DOMAIN]="52:54:00:2C:C2:A0" \
-    ["master1."$DOMAIN]="52:54:00:AC:C6:E1" \
-    ["master2."$DOMAIN]="52:54:00:DE:6B:C4" \
-    ["node0."$DOMAIN]="52:54:00:96:FF:84"   \
-    ["node1."$DOMAIN]="52:54:00:4A:22:9B"   \
-    ["node2."$DOMAIN]="52:54:00:4A:22:9C"   \
-    ["node3."$DOMAIN]="52:54:00:4A:22:9D"   \
+export VM_LIST="jump master0 master1 master2 lb node1 node2 node3"
+export DOMAIN="nip.io"
+declare -A IPADDRESS=( \
+    ["jump"]="192.168.1.59" \
+    ["master0"]="192.168.1.107" \
+    ["master1"]="192.168.1.145" \
+    ["master2"]="192.168.1.16" \
+    ["lb"]="192.168.1.175" \
+    ["node1"]="192.168.1.245" \
+    ["node2"]="192.168.1.246" \
+    ["node3"]="192.168.1.248" \
 )
-export OCPDOMAIN="nozell.com"
+declare -A MACADDRESS=( \
+    ["jump"]="52:54:00:42:B4:AD" \
+    ["master0"]="52:54:00:2C:C2:A0" \
+    ["master1"]="52:54:00:AC:C6:E1" \
+    ["master2"]="52:54:00:DE:6B:C4" \
+    ["lb"]="52:54:00:96:FF:84"   \
+    ["node1"]="52:54:00:4A:22:9B"   \
+    ["node2"]="52:54:00:4A:22:9C"   \
+    ["node3"]="52:54:00:4A:22:9D"   \
+)
+export OCPDOMAIN="btsaunde.com"
 export WORKSPACE="$HOME/ocp"
 export VMS="$WORKSPACE/VMs"
 export ISOS="$HOME/ISOs"
