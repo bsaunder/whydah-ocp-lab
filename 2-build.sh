@@ -22,7 +22,7 @@ do
 
     echo "---> Starting Dry Run for $i w/ MAC ${MACADDRESS[$NAME]}"
 
-    virt-install --ram $VMRAM  --vcpus 4 --os-variant rhel7 --disk path=$image,device=disk,bus=virtio,format=qcow2 \
+    virt-install --ram $VMRAM  --vcpus 2 --os-variant rhel7 --disk path=$image,device=disk,bus=virtio,format=qcow2 \
         --noautoconsole --vnc --name $i --dry-run --cpu host-passthrough,+vmx --network bridge=${BRIDGE},mac=${MACADDRESS[$NAME]} \
     	--print-xml > $VMS/$i.xml
 

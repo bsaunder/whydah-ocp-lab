@@ -1,5 +1,5 @@
 # See README.md
-export OCP_LIST="master0 node0 node1 node2"
+export OCP_LIST="master0 node0"
 export JUMP_LIST="jump"
 export DOMAIN="nip.io"
 declare -A IPADDRESS=( \
