@@ -1,58 +1,39 @@
-# Create an OSEv3 group that contains the master, nodes, etcd, and lb groups.
-# The lb group lets Ansible configure HAProxy as the load balancing solution.
-# Comment lb out if your load balancer is pre-configured.
+# Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
-etcd
-lb
 
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
+# SSH user, this user should allow ssh based auth without requiring a password
 ansible_ssh_user=root
-openshift_deployment_type=openshift-enterprise
+#openshift_hosted_metrics_deploy=false
+openshift_release=v3.7
+openshift_enable_service_catalog=true
 
-# Uncomment the following to enable htpasswd authentication; defaults to
-# DenyAllPasswordIdentityProvider.
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+openshift_disable_check=disk_availability
 
-# Native high availability cluster method with optional load balancer.
-# If no lb group is defined installer assumes that a load balancer has
-# been preconfigured. For installation the value of
-# openshift_master_cluster_hostname must resolve to the load balancer
-# or to one or all of the masters defined in the inventory if no load
-# balancer is present.
-openshift_master_cluster_method=native
+# If ansible_ssh_user is not root, ansible_become must be set to true
+#ansible_become=true
+
+deployment_type=openshift-enterprise
+
 openshift_master_cluster_hostname=ocp.btsaunde.com
 openshift_master_cluster_public_hostname=ocp.btsaunde.com
-
 openshift_master_default_subdomain=apps.btsaunde.com
 
-# enable ntp on masters to ensure proper failover
-openshift_clock_enabled=true
-openshift_master_cluster_method=native
+# uncomment the following to enable htpasswd authentication; defaults to DenyAllPasswordIdentityProvider
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 
 # host group for masters
 [masters]
-master1.batcluster
-master2.batcluster
-master3.batcluster
+master0.192.168.1.107.nip.io
 
 # host group for etcd
 [etcd]
-master1.batcluster
-master2.batcluster
-master3.batcluster
-
-# Specify load balancer host
-[lb]
-lb.batcluster
+master0.192.168.1.107.nip.io
 
 # host group for nodes, includes region info
 [nodes]
-master0.batcluster openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
-master1.batcluster openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
-master2.batcluster openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
-node1.batcluster openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
-node2.batcluster openshift_node_labels="{'region': 'primary', 'zone': 'west'}" openshift_schedulable=true
-node2.batcluster openshift_node_labels="{'region': 'primary', 'zone': 'central'}" openshift_schedulable=true
+master0.192.168.1.107.nip.io openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
+node0.192.168.1.245.nip.io openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_schedulable=true
